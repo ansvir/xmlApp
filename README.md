@@ -15,6 +15,10 @@ for source code see branches
 2. click 'Load'
 3. use 'Show add', 'Show update', 'Save', 'Delete' to manipulate data from table
 
+### last release features
+1. update record
+2. sort records by column ascending/descending
+
 use ROOT.war to deploy the app
 
 use company.xml as example file
