@@ -1,4 +1,4 @@
-see branches
+for source code see branches
 
 ### To run angular
 1. clone 'frontend' branch
@@ -9,3 +9,13 @@ see branches
 2. import dependencies in pom.xml
 3. run 'mvn clean install'
 4. run 'mvn tomcat7:run'
+
+### How to start with app
+1. enter path to xml file
+2. click 'Load'
+3. use 'Show add', 'Show update', 'Save', 'Delete' to manipulate data from table
+
+use ROOT.war to deploy the app
+
+use company.xml as example file
+
