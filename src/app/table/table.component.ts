@@ -25,6 +25,7 @@ export class TableComponent implements OnInit {
   updateFormStatus;
   currentSelected;
   xmlLoaded;
+  exampleRow;
   constructor(private appService: AppService) { }
   ngOnInit() {
     this.addTitle = "Show add";
@@ -37,6 +38,7 @@ export class TableComponent implements OnInit {
     this.properties = [];
     this.newRow = null;
     this.xmlLoaded = false;
+    this.exampleRow = null;
   }
   addForm() {
     this.addFormStatus = !this.addFormStatus;
@@ -46,7 +48,7 @@ export class TableComponent implements OnInit {
       this.tableStatus = "";
       this.newRow = Object.create(Staff.prototype);
     } else if (this.addFormStatus === true && this.updateFormStatus === true) {
-      this.addTitle = "Hide update";
+      this.addTitle = "Hide add";
       this.updateTitle = "Show update";
       this.updateFormStatus = false;
       this.savedStatus = "";
@@ -60,7 +62,6 @@ export class TableComponent implements OnInit {
     }
   }
   addRow() {
-    console.log(this.newRow);
     if (Object.entries(this.newRow).length !== this.properties.length) {
       this.savedStatus = "empty value";
       this.tableStatus = "";
@@ -75,6 +76,11 @@ export class TableComponent implements OnInit {
         }
       }
     }
+    if(isNaN(Number(this.newRow.id))) {
+      this.savedStatus = "invalid id";
+      this.tableStatus = "";
+      return;
+    }
     if (!this.validName.test(this.newRow.firstName)) {
       this.savedStatus = "invalid first name";
       this.tableStatus = "";
@@ -87,6 +93,11 @@ export class TableComponent implements OnInit {
     }
     if (!this.validEmail.test(this.newRow.email)) {
       this.savedStatus = "invalid email";
+      this.tableStatus = "";
+      return;
+    }
+    if(isNaN(Number(this.newRow.salary))) {
+      this.savedStatus = "invalid salary";
       this.tableStatus = "";
       return;
     }
@@ -156,6 +167,19 @@ export class TableComponent implements OnInit {
         });
       this.xmlLoaded = true;
       this.xmlPathStatus = "Successfully loaded";
+      this.exampleRow = this.staff[0];
+      console.log(this.exampleRow);
+      for(const key in this.exampleRow) {
+        if(!isNaN(Number(this.exampleRow[key]))) {
+          console.log("number");
+          this.exampleRow[key] = '100';
+          return;
+        } else {
+          console.log("string");
+          this.exampleRow[key] = "Example";
+        }
+      }
+      console.log(this.exampleRow);
     } catch (exc) {
       console.log(exc);
       this.xmlPathStatus = "error occurred";
@@ -165,6 +189,11 @@ export class TableComponent implements OnInit {
     this.rowsSelected[i] = !this.rowsSelected[i];
     if (this.rowsSelected[i] === true) {
       this.currentSelected = i;
+    }
+    if(this.updateFormStatus==true) {
+      this.newRow = this.staff[this.currentSelected];
+    } else if(this.addFormStatus==true) {
+      this.newRow = this.exampleRow;
     }
     for (const row of this.rowsSelected) {
       if (row === true) {
@@ -195,7 +224,6 @@ export class TableComponent implements OnInit {
     }
   }
     updateRow() {
-      console.log(this.newRow);
       if (Object.entries(this.newRow).length !== this.properties.length) {
         this.savedStatus = "empty value";
         this.tableStatus = "";
@@ -210,6 +238,11 @@ export class TableComponent implements OnInit {
           }
         }
       }
+      if(isNaN(Number(this.newRow.id))) {
+        this.savedStatus = "invalid id";
+        this.tableStatus = "";
+        return;
+      }
       if (!this.validName.test(this.newRow.firstName)) {
         this.savedStatus = "invalid first name";
         this.tableStatus = "";
@@ -221,7 +254,12 @@ export class TableComponent implements OnInit {
         return;
       }
       if (!this.validEmail.test(this.newRow.email)) {
-        this.savedStatus = "invalid email";
+        this.savedStatus = `invalid email`;
+        this.tableStatus = "";
+        return;
+      }
+      if(isNaN(Number(this.newRow.salary))) {
+        this.savedStatus = "invalid salary";
         this.tableStatus = "";
         return;
       }

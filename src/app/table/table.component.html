@@ -36,7 +36,7 @@
       <div *ngFor="let key of properties">
         {{key}}:<input type="text" name="inputAddRow" *ngIf="newRow!=null" [(ngModel)]="newRow[key]">
       </div>
-      <div class="row-submit" (click)="addRow()">Submit</div>
+      <div class="row-submit" (click)="addRow()">Add</div>
       <div style="margin-top:10px">{{savedStatus}}</div>
     </div>
     <div style="margin-top:10px; text-align: center" *ngIf="updateFormStatus&&currentSelected==undefined">Choose record</div>
@@ -44,7 +44,7 @@
       <div *ngFor="let key of properties">
         {{key}}:<input type="text" name="inputUpdateRow" *ngIf="newRow!=null&&currentSelected!=undefined" [(ngModel)]="newRow[key]" [value]="staff[currentSelected][key]">
       </div>
-      <div class="row-submit" (click)="updateRow()">Submit</div>
+      <div class="row-submit" (click)="updateRow()">Update</div>
       <div style="margin-top:10px">{{savedStatus}}</div>
     </div>
   </div>
