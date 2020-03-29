@@ -1,14 +1,14 @@
 for source code see branches
 
-### To run angular
+### To run front
 1. clone 'frontend' branch
 2. in the branch root directory run 'npm install' to load angular dependencies to local folder
 3. run 'ng serve'
-### To run spring
+### To run back
 1. clone 'backend' branch
 2. import dependencies in pom.xml
 3. run 'mvn clean install'
-4. run 'mvn tomcat7:run'
+4. run 'mvn tomcat7:run' or both 3 and 4 inline
 
 ### How to start with app
 1. enter path to xml file
